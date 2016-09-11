@@ -22,7 +22,7 @@ public class Startup {
     }
 
     private static void startJVM(Cmd cmd) {
-        System.out.println(String.format("classpath:%s, class:%s, args:%v",
-                cmd.getCpOption(), cmd.getClazz(), cmd.getArgs().toArray()));
+        System.out.println(String.format("classpath:%s, class:%s",
+                cmd.getCpOption(), cmd.getClazz()));
     }
 }
