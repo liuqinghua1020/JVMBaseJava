@@ -14,6 +14,7 @@ public class Cmd {
     private boolean helpFlag;
     private boolean versionFlag;
     private String cpOption;
+    private String XjreOption;
     private String clazz;
     private List<String> args;
 
@@ -68,6 +69,7 @@ public class Cmd {
             options.addOption("version", false, "print version and exit");
             options.addOption("classpath", true, "classpath");
             options.addOption("cp", true, "classpath");
+            options.addOption("Xjre", false, "path to jre ");
 
             CommandLine line = parser.parse(options, args);
 
@@ -91,6 +93,10 @@ public class Cmd {
                 }
             }
 
+            if(line.hasOption("Xjre")){
+                cmd.setXjreOption(line.getOptionValue("Xjre"));
+            }
+
             String[] restArgs = line.getArgs();
             if (restArgs != null && restArgs.length >= 1) {
                 cmd.setClazz(restArgs[0]);
@@ -110,5 +116,13 @@ public class Cmd {
 
     public static void printUsage(PrintStream out){
         out.println("Usage: java [-option] class [args...]");
+    }
+
+    public void setXjreOption(String xjreOption) {
+        XjreOption = xjreOption;
+    }
+
+    public String getXjreOption() {
+        return XjreOption;
     }
 }
