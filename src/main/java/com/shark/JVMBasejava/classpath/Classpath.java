@@ -26,7 +26,7 @@ public class Classpath {
 
     private void parseBootAndExtClasspath(String jreOption) {
         String jreDir = this.getJreDir(jreOption);
-
+        System.out.println("jreDir " + jreDir);
         String jreLibPath = jreDir + "lib/*"; //jre/lib/*
         this.bootClasspath = new WildcardEntry(jreLibPath);
 

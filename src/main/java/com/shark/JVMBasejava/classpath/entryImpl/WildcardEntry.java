@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.OrFileFilter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class WildcardEntry extends  CompositeEntry{
         fileFilters.add(FileFilterUtils.suffixFileFilter("jar"));
         fileFilters.add(FileFilterUtils.suffixFileFilter("JAR"));
 
-        Collection<File> files = FileUtils.listFiles(new File(baseDir), new AndFileFilter(fileFilters), null);
+        Collection<File> files = FileUtils.listFiles(new File(baseDir), new OrFileFilter(fileFilters), null);
         for(File file:files){
             Entry entry = new ZipEntry(file.getAbsolutePath());
             this.list.add(entry);

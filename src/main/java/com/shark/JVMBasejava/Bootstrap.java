@@ -29,7 +29,9 @@ public class Bootstrap {
                 cmd.getCpOption(), cmd.getClazz()));
         ClassPathParser classPathParser = new ClassPathParser();
         Classpath classpath = classPathParser.parse(cmd.getXjreOption(), cmd.getCpOption());
-        byte[] clazzData = classpath.readClass(cmd.getClazz());
+        String clazz = cmd.getClazz();
+        clazz = clazz.replaceAll("\\.", "\\/");
+        byte[] clazzData = classpath.readClass(clazz);
         System.out.println(clazzData.length);
     }
 }

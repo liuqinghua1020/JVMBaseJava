@@ -69,7 +69,7 @@ public class Cmd {
             options.addOption("version", false, "print version and exit");
             options.addOption("classpath", true, "classpath");
             options.addOption("cp", true, "classpath");
-            options.addOption("Xjre", false, "path to jre ");
+            options.addOption("Xjre", true, "path to jre ");
 
             CommandLine line = parser.parse(options, args);
 

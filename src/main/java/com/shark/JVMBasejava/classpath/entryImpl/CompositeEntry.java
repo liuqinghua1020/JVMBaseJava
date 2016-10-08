@@ -13,12 +13,12 @@ public class CompositeEntry implements Entry {
 
     protected List<Entry> list = null;
 
-    public CompositeEntry(){}
+    public CompositeEntry(){list = new ArrayList<>();}
 
     public CompositeEntry(String pathList){
         list = new ArrayList<>();
 
-        String[] paths = pathList.split(File.separator);
+        String[] paths = pathList.split(":");
         for(String path:paths){
             Entry entry = Entry.newEntry(path);
             list.add(entry);
