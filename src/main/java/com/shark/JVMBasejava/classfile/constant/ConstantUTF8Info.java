@@ -15,6 +15,11 @@ public class ConstantUTF8Info extends ConstantInfo {
         super(classReader, constantPool);
     }
 
+    @Override
+    public void readInfo() throws Exception {
+        this.string = this.getClassReader().readUTF8();
+    }
+
     public String getString() {
         return string;
     }

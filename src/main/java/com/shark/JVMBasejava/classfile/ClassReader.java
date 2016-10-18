@@ -30,7 +30,6 @@ public class ClassReader {
     }
 
     public int readUnit32() throws IOException{
-
         return dataInput.readInt();
 
     }
@@ -58,5 +57,9 @@ public class ClassReader {
         }
 
         return bytes;
+    }
+
+    public String readUTF8() throws IOException{
+        return this.dataInput.readUTF();
     }
 }

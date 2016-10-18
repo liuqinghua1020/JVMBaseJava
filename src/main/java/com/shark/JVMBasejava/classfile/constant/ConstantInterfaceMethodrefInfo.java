@@ -7,7 +7,7 @@ import com.shark.JVMBasejava.classfile.constant.ConstantInfo;
 /**
  * Created by liuqinghua on 16-10-16.
  */
-public class ConstantInterfaceMethodrefInfo extends ConstantInfo {
+public class ConstantInterfaceMethodrefInfo extends ConstantMemberrefInfo {
     public ConstantInterfaceMethodrefInfo(ClassReader classReader, ConstantPool constantPool) {
         super(classReader, constantPool);
     }

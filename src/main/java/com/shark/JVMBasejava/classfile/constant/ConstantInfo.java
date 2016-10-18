@@ -84,9 +84,9 @@ public abstract class ConstantInfo {
             case ConstantInfo.CONSTANT_InvokeDynamic_info:
                 ConstantInvokeDynamicInfo constantInvokeDynamicInfo = new ConstantInvokeDynamicInfo(classReader, constantPool);
                 return constantInvokeDynamicInfo;
+            default:
+                throw new ClassFormatError();
         }
-
-        return null;
     }
 
     public ClassReader getClassReader() {
@@ -112,4 +112,6 @@ public abstract class ConstantInfo {
     public void setType(int type) {
         this.type = type;
     }
+
+    public abstract void readInfo() throws Exception;
 }

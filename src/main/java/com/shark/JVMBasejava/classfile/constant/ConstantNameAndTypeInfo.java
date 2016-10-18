@@ -16,6 +16,12 @@ public class ConstantNameAndTypeInfo extends ConstantInfo {
         super(classReader, constantPool);
     }
 
+    @Override
+    public void readInfo() throws Exception {
+        this.nameIndex = this.getClassReader().readUnit16();
+        this.descriptorIndex = this.getClassReader().readUnit16();
+    }
+
 
     public int getNameIndex() {
         return nameIndex;
