@@ -1,5 +1,6 @@
 package com.shark.JVMBasejava.classfile;
 
+import com.shark.JVMBasejava.classfile.attribute.AttributeInfo;
 import com.shark.JVMBasejava.exception.ClassParseException;
 
 import java.io.IOException;
