@@ -66,6 +66,10 @@ public class ConstantPool {
         return constantUTF8Info.getString();
     }
 
+    public int constantsCount(){
+        return this.constantInfos.length;
+    }
+
     public ClassReader getClassReader() {
         return classReader;
     }

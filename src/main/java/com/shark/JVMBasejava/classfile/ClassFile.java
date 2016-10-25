@@ -2,6 +2,7 @@ package com.shark.JVMBasejava.classfile;
 
 import com.shark.JVMBasejava.classfile.attribute.AttributeInfo;
 import com.shark.JVMBasejava.exception.ClassParseException;
+import com.shark.JVMBasejava.exception.ConstantPoolException;
 
 import java.io.IOException;
 
@@ -136,5 +137,45 @@ public class ClassFile {
 
     public void setInterfaces(int[] interfaces) {
         this.interfaces = interfaces;
+    }
+
+    public ConstantPool getConstantPool() {
+        return constantPool;
+    }
+
+    public void setConstantPool(ConstantPool constantPool) {
+        this.constantPool = constantPool;
+    }
+
+    public String className() throws ConstantPoolException {
+        return this.getConstantPool().getClassName(this.getThisClass());
+    }
+
+    public String superClassName() throws ConstantPoolException {
+        return this.getConstantPool().getClassName(this.getSuperClass());
+    }
+
+    public MemberInfo[] getFields() {
+        return fields;
+    }
+
+    public void setFields(MemberInfo[] fields) {
+        this.fields = fields;
+    }
+
+    public MemberInfo[] getMethods() {
+        return methods;
+    }
+
+    public void setMethods(MemberInfo[] methods) {
+        this.methods = methods;
+    }
+
+    public AttributeInfo getAttributeInfo() {
+        return attributeInfo;
+    }
+
+    public void setAttributeInfo(AttributeInfo attributeInfo) {
+        this.attributeInfo = attributeInfo;
     }
 }

@@ -13,6 +13,5 @@ public class SyntheticAttribute extends AttributeInfo {
 
     @Override
     public void readInfo() throws Exception {
-
     }
 }

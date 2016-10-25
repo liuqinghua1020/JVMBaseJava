@@ -1,7 +1,9 @@
 package com.shark.JVMBasejava;
 
+import com.shark.JVMBasejava.classfile.ClassFile;
 import com.shark.JVMBasejava.classpath.ClassPathParser;
 import com.shark.JVMBasejava.classpath.Classpath;
+import com.shark.JVMBasejava.exception.ConstantPoolException;
 
 import java.text.Format;
 
@@ -32,6 +34,22 @@ public class Bootstrap {
         String clazz = cmd.getClazz();
         clazz = clazz.replaceAll("\\.", "\\/");
         byte[] clazzData = classpath.readClass(clazz);
-        System.out.println(clazzData.length);
+        loadClass(clazzData);
+    }
+
+    private static void loadClass(byte[] clazzData) throws Exception {
+        ClassFile cf = ClassFile.parse(clazzData);
+
+    }
+
+    private static void printClassInfo(ClassFile classFile) throws ConstantPoolException {
+        System.out.println("version: " + classFile.getMajorVersion() + ":" + classFile.getMinorVersion());
+        System.out.println("constants count: " + classFile.getConstantPool().constantsCount());
+        System.out.println("access flags: " + classFile.getAccessFlags());
+        System.out.println("this class: " + classFile.className());
+        System.out.println("super class: " + classFile.className());
+        System.out.println("super class: " + classFile.superClassName());
+        System.out.println("field count " + classFile.getFields().length);
+        System.out.println("method count " + classFile.getMethods().length);
     }
 }

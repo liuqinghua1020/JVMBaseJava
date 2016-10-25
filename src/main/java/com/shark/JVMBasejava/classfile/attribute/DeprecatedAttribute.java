@@ -13,6 +13,5 @@ public class DeprecatedAttribute extends AttributeInfo {
 
     @Override
     public void readInfo() throws Exception {
-
     }
 }
