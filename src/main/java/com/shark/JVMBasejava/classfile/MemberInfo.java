@@ -21,7 +21,7 @@ public class MemberInfo {
         this.classReader = classReader;
     }
 
-    public static MemberInfo[] readMembers(ClassReader  classReader, ConstantPool cp) throws IOException {
+    public static MemberInfo[] readMembers(ClassReader  classReader, ConstantPool cp) throws Exception {
         int memberCount = classReader.readUnit16();
         MemberInfo[] memberInfos = new MemberInfo[memberCount];
         for(int i=0; i<memberCount;i++){
@@ -32,8 +32,12 @@ public class MemberInfo {
     }
 
 
-    public static MemberInfo readMember(ClassReader  classReader, ConstantPool cp){
+    public static MemberInfo readMember(ClassReader  classReader, ConstantPool cp) throws Exception {
         MemberInfo memberInfo = new MemberInfo(classReader, cp);
+        memberInfo.setAccessFlags(classReader.readUnit16());
+        memberInfo.setNameIndex(classReader.readUnit16());
+        memberInfo.setDescriptorIndex(classReader.readUnit16());
+        memberInfo.setAttributes(AttributeInfo.readAttributes(classReader, cp));
         return memberInfo;
     }
 
@@ -76,5 +80,13 @@ public class MemberInfo {
 
     public void setClassReader(ClassReader classReader) {
         this.classReader = classReader;
+    }
+
+    public AttributeInfo[] getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(AttributeInfo[] attributes) {
+        this.attributes = attributes;
     }
 }

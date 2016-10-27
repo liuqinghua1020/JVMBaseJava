@@ -39,7 +39,7 @@ public class Bootstrap {
 
     private static void loadClass(byte[] clazzData) throws Exception {
         ClassFile cf = ClassFile.parse(clazzData);
-
+        printClassInfo(cf);
     }
 
     private static void printClassInfo(ClassFile classFile) throws ConstantPoolException {

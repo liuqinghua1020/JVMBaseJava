@@ -34,9 +34,10 @@ public abstract class ConstantInfo {
         this.constantPool = constantPool;
     }
 
-    public static ConstantInfo readConstantInfo(ClassReader classReader, ConstantPool constantPool) throws IOException {
+    public static ConstantInfo readConstantInfo(ClassReader classReader, ConstantPool constantPool) throws Exception {
         int tag = classReader.readUnit8();
         ConstantInfo constantInfo = newConstantInfo(tag, classReader, constantPool);
+        constantInfo.readInfo();
         return constantInfo;
     }
 
@@ -85,7 +86,7 @@ public abstract class ConstantInfo {
                 ConstantInvokeDynamicInfo constantInvokeDynamicInfo = new ConstantInvokeDynamicInfo(classReader, constantPool);
                 return constantInvokeDynamicInfo;
             default:
-                throw new ClassFormatError();
+                throw new ClassFormatError("unKnow tag : " + tag);
         }
     }
 

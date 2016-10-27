@@ -20,7 +20,7 @@ public class ClassFile {
     private int[] interfaces;
     private MemberInfo[] fields;
     private MemberInfo[] methods;
-    private AttributeInfo attributeInfo;
+    private AttributeInfo[] attributeInfos;
 
     private ClassReader classReader = null;
 
@@ -31,6 +31,7 @@ public class ClassFile {
     public static ClassFile parse(byte[] classData) throws Exception{
         ClassReader classReader = new ClassReader(classData);
         ClassFile cf = new ClassFile(classReader);
+        cf.read();
         return cf;
     }
 
@@ -41,17 +42,17 @@ public class ClassFile {
         this.readAndCheckMagic();
         this.readAndCheckVersion();
         //TODO constantPool
-        this.constantPool = null;
+        this.constantPool = ConstantPool.readConstantPool(this.classReader);
         this.accessFlags = classReader.readUnit16();
         this.thisClass = classReader.readUnit16();
         this.superClass = classReader.readUnit16();
         this.interfaces = classReader.readUnit16s();
         //TODO fields
-        this.fields = null;
+        this.fields = MemberInfo.readMembers(classReader,constantPool);
         //TODO methods
-        this.methods = null;
+        this.methods = MemberInfo.readMembers(classReader,constantPool);
         // TODO attributeInfo
-        this.attributeInfo = null ;
+        this.attributeInfos = AttributeInfo.readAttributes(classReader,constantPool) ;
     }
 
 
@@ -171,11 +172,12 @@ public class ClassFile {
         this.methods = methods;
     }
 
-    public AttributeInfo getAttributeInfo() {
-        return attributeInfo;
+
+    public AttributeInfo[] getAttributeInfos() {
+        return attributeInfos;
     }
 
-    public void setAttributeInfo(AttributeInfo attributeInfo) {
-        this.attributeInfo = attributeInfo;
+    public void setAttributeInfos(AttributeInfo[] attributeInfos) {
+        this.attributeInfos = attributeInfos;
     }
 }

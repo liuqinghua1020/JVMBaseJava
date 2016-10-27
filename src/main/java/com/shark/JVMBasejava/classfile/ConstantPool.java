@@ -21,11 +21,12 @@ public class ConstantPool {
         this.constantInfos = constantInfos;
     }
 
-    public static ConstantPool readConstantPool(ClassReader classReader) throws IOException {
+    public static ConstantPool readConstantPool(ClassReader classReader) throws Exception {
         int cpCount = classReader.readUnit16();
         ConstantInfo[] constantInfos = new ConstantInfo[cpCount];
         ConstantPool constantPool = new ConstantPool(classReader, constantInfos);
-        for(int i=0;i<cpCount;i++){
+        for(int i=0;i<cpCount-1;i++){
+            System.out.println("i=" + i);
             constantInfos[i] = ConstantInfo.readConstantInfo(classReader, constantPool);
             switch (constantInfos[i].getType()){
                 case ConstantInfo.CONASTANT_Long_info:
