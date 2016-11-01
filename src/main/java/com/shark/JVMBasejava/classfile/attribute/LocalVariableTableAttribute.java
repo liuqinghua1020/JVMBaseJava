@@ -16,7 +16,7 @@ public class LocalVariableTableAttribute extends AttributeInfo {
 
     @Override
     public void readInfo() throws Exception {
-
+        localVariableTableEntry = LocalVariableTableEntry.readLocalVariableTableEntrys(this.getClassReader());
     }
 
     public LocalVariableTableEntry[] getLocalVariableTableEntry() {

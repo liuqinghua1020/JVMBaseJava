@@ -37,6 +37,7 @@ public abstract class ConstantInfo {
     public static ConstantInfo readConstantInfo(ClassReader classReader, ConstantPool constantPool) throws Exception {
         int tag = classReader.readUnit8();
         ConstantInfo constantInfo = newConstantInfo(tag, classReader, constantPool);
+        constantInfo.setType(tag);
         constantInfo.readInfo();
         return constantInfo;
     }

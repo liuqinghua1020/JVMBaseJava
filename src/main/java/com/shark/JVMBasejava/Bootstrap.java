@@ -47,7 +47,6 @@ public class Bootstrap {
         System.out.println("constants count: " + classFile.getConstantPool().constantsCount());
         System.out.println("access flags: " + classFile.getAccessFlags());
         System.out.println("this class: " + classFile.className());
-        System.out.println("super class: " + classFile.className());
         System.out.println("super class: " + classFile.superClassName());
         System.out.println("field count " + classFile.getFields().length);
         System.out.println("method count " + classFile.getMethods().length);

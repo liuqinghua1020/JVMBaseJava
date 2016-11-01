@@ -23,10 +23,9 @@ public class ConstantPool {
 
     public static ConstantPool readConstantPool(ClassReader classReader) throws Exception {
         int cpCount = classReader.readUnit16();
-        ConstantInfo[] constantInfos = new ConstantInfo[cpCount];
+        ConstantInfo[] constantInfos = new ConstantInfo[cpCount+1];
         ConstantPool constantPool = new ConstantPool(classReader, constantInfos);
-        for(int i=0;i<cpCount-1;i++){
-            System.out.println("i=" + i);
+        for(int i=1;i<cpCount;i++){
             constantInfos[i] = ConstantInfo.readConstantInfo(classReader, constantPool);
             switch (constantInfos[i].getType()){
                 case ConstantInfo.CONASTANT_Long_info:
@@ -44,6 +43,8 @@ public class ConstantPool {
             if(constantInfo == null){
                 throw new ConstantPoolException("Invalid constant pool element");
             }
+
+            return constantInfo;
         }
 
         throw new ConstantPoolException("Invalid constant pool index");
