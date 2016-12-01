@@ -9,6 +9,9 @@ public class LocalVars {
 
     public LocalVars(int maxLocals){
         slots = new Slot[maxLocals];
+        for(int i=0;i<maxLocals;i++){
+            slots[i] = new Slot();
+        }
     }
 
     public void setInt(int index, int value){
@@ -30,14 +33,15 @@ public class LocalVars {
     }
 
     public void setLong(int index, long value){
-        slots[index].setNum((int)value);
-        slots[index + 1].setNum((int)(value>>32));
+        slots[index].setNum((int) (0xFFFFFFFFl & value));
+        slots[index + 1].setNum((int) ((0xFFFFFFFF00000000l & value) >> 32));
     }
 
     public long getLong(int index){
         int low = slots[index].getNum();
         int high = slots[index + 1].getNum();
-        return (long)(high<<32 | low);
+        long result = ((long)low & 0xFFFFFFFFl) | (((long)high << 32) & 0xFFFFFFFF00000000l);
+        return result;
     }
 
     public void setDouble(int index, double value){

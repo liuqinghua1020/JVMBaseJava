@@ -17,11 +17,11 @@ public class RTThread {
         stack.push(frame);
     }
 
-    public RTFrame popFrame(){
+    public RTFrame popFrame() throws Exception {
         return stack.popFrame();
     }
 
-    public RTFrame currentFrame(){
+    public RTFrame currentFrame() throws Exception {
         return stack.topFrame();
     }
 

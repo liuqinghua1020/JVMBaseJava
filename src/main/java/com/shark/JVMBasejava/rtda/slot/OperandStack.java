@@ -12,6 +12,9 @@ public class OperandStack {
     public OperandStack(int maxStack){
         if(maxStack > 0){
             slots = new Slot[maxStack];
+            for(int i=0;i<maxStack;i++){
+                slots[i] = new Slot();
+            }
         }
     }
 
@@ -36,8 +39,8 @@ public class OperandStack {
     }
 
     public void pushLong(long value){
-        this.slots[this.size].setNum((int)value);
-        this.slots[this.size+1].setNum((int)(value>>32));
+        this.slots[this.size].setNum((int) (0xFFFFFFFFl & value));
+        this.slots[this.size+1].setNum((int) ((0xFFFFFFFF00000000l & value) >> 32));
         this.size += 2;
     }
 
@@ -45,7 +48,8 @@ public class OperandStack {
         this.size -= 2;
         int low = this.slots[this.size].getNum();
         int high = this.slots[this.size+1].getNum();
-        return (long)(high << 32 | low);
+        long result = ((long)low & 0xFFFFFFFFl) | (((long)high << 32) & 0xFFFFFFFF00000000l);
+        return result;
     }
 
     public void pushDouble(double value){

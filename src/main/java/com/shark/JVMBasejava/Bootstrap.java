@@ -4,6 +4,9 @@ import com.shark.JVMBasejava.classfile.ClassFile;
 import com.shark.JVMBasejava.classpath.ClassPathParser;
 import com.shark.JVMBasejava.classpath.Classpath;
 import com.shark.JVMBasejava.exception.ConstantPoolException;
+import com.shark.JVMBasejava.rtda.RTFrame;
+import com.shark.JVMBasejava.rtda.slot.LocalVars;
+import com.shark.JVMBasejava.rtda.slot.OperandStack;
 
 import java.text.Format;
 
@@ -27,14 +30,17 @@ public class Bootstrap {
     }
 
     private static void startJVM(Cmd cmd) throws Exception {
-        System.out.println(String.format("classpath:%s, class:%s",
+        /*System.out.println(String.format("classpath:%s, class:%s",
                 cmd.getCpOption(), cmd.getClazz()));
         ClassPathParser classPathParser = new ClassPathParser();
         Classpath classpath = classPathParser.parse(cmd.getXjreOption(), cmd.getCpOption());
         String clazz = cmd.getClazz();
         clazz = clazz.replaceAll("\\.", "\\/");
         byte[] clazzData = classpath.readClass(clazz);
-        loadClass(clazzData);
+        loadClass(clazzData);*/
+        RTFrame frame = new RTFrame(100, 100);
+        testLocalVars(frame.getLocalVars());
+        testOperandStack(frame.getOperandStack());
     }
 
     private static void loadClass(byte[] clazzData) throws Exception {
@@ -50,5 +56,16 @@ public class Bootstrap {
         System.out.println("super class: " + classFile.superClassName());
         System.out.println("field count " + classFile.getFields().length);
         System.out.println("method count " + classFile.getMethods().length);
+    }
+
+    private static void testLocalVars(LocalVars localVars) {
+        localVars.setLong(0, Long.MAX_VALUE-1);
+        System.out.println("Long Max - 1 :" +  (Long.MAX_VALUE-1));
+        System.out.println(localVars.getLong(0));
+    }
+
+    private static void testOperandStack(OperandStack operandStack){
+        operandStack.pushLong(Long.MAX_VALUE-1);
+        System.out.println(operandStack.popLong());
     }
 }
