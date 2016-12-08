@@ -1,4 +1,4 @@
-package com.shark.JVMBasejava.instructions;
+package com.shark.JVMBasejava.instructions.base;
 
 /**
  * Created by liuqinghua on 16-12-6.

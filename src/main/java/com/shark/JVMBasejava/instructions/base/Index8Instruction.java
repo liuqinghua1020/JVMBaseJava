@@ -1,15 +1,15 @@
-package com.shark.JVMBasejava.instructions;
+package com.shark.JVMBasejava.instructions.base;
 
 import com.shark.JVMBasejava.rtda.RTFrame;
 
 /**
  * Created by liuqinghua on 16-12-6.
  */
-public class Index16Instruction implements Instruction {
+public class Index8Instruction implements Instruction {
     private int index;
     @Override
     public void fetchOperands(BytecodeReader reader) {
-        this.index = reader.readUint16();
+        this.index = reader.readUint8();
     }
 
     @Override

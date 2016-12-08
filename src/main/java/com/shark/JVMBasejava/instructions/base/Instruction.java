@@ -1,4 +1,4 @@
-package com.shark.JVMBasejava.instructions;
+package com.shark.JVMBasejava.instructions.base;
 
 import com.shark.JVMBasejava.rtda.RTFrame;
 
