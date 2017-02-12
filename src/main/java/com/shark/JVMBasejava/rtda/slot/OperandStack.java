@@ -71,4 +71,14 @@ public class OperandStack {
         this.size --;
         return this.slots[this.size].getRef();
     }
+
+    public void pushSlot(Slot slot){
+        this.slots[this.size] = slot;
+        this.size ++;
+    }
+
+    public Slot popSlot(){
+        this.size --;
+        return this.slots[this.size];
+    }
 }
